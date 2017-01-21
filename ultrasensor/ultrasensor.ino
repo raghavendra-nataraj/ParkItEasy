@@ -1,25 +1,3 @@
-/*
-  Blink
-  Turns on an LED on for one second, then off for one second, repeatedly.
-
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO 
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino model, check
-  the Technical Specs of your board  at https://www.arduino.cc/en/Main/Products
-  
-  This example code is in the public domain.
-
-  modified 8 May 2014
-  by Scott Fitzgerald
-  
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  
-  modified 8 Sep 2016
-  by Colby Newman
-*/
-
 #include "RCSwitch.h"
 
 RCSwitch mySwitch = RCSwitch();
@@ -57,14 +35,14 @@ void loop() {
   // convert the time into a distance
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
-  String id = "1_";
-  String zip = "47408_";  
+  String id = "1";
+  String zip = "47408";
+  String lot = "2";
+  long ret = 47408120;
   if(cm>0 && cm < 5){
-    String ret = id+zip+"True" ;
-    mySwitch.send(ret.c_str());
+    mySwitch.send(ret+1,32);
   }else{
-    String ret = id+zip+"False";
-    mySwitch.send(ret.c_str());
+    mySwitch.send(ret+0,32);
   }
   Serial.print(inches);
   Serial.print("in, ");
