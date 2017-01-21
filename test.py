@@ -4,8 +4,8 @@ __author__ = 'Shwetha'
 from cloudant.client import Cloudant
 import sys
 import time
-import serial
-ser = serial.Serial('/dev/ttyACM0', 9600)
+# ser = serial.Serial('/dev/ttyACM0', 9600)
+# import serial
 
 
 def commonCreation():
@@ -30,8 +30,8 @@ session = client.session()
 
 
 def update():
-     if 'roo' in client.all_dbs():
-          my_database = client['roo']
+     if 'parking' in client.all_dbs():
+          my_database = client['parking']
           selector = {'zipcode': zipcode,'pno':rpino,'_id':id}
           docs = my_database.get_query_result(selector,raw_result=True, limit=100)
           # print len(docs['docs'])
@@ -64,14 +64,28 @@ def update():
 
 
 
+# def checkForUpdate:
 
 
+
+
+masterdict={}
+
+if 'roo' in client.all_dbs():
+    #Reading data into local dictionary
+    my_daata = client['roo']
+    print type(my_daata)
+    for doc in my_daata:
+        pin= str(doc['zipcode'].trim()) + str(doc['pno'])  + str(doc['_id'])
+        masterdict[pin] = doc['status']
 
 
 
 
 
 while True:
+
+
     serInp =  ser.readline()
     print serInp
     inps = serInp.split("_")
@@ -80,5 +94,17 @@ while True:
          zipcode = inps[3]
          rpino = inps[2]
          statuss = inps[0]
-         update();
+        # update();
+
+    #check for update in value
+    for key,val in masterdict.iteritems():
+        if key == (str(zipcode) + str(rpino) + str(id)) and val!=statuss:
+            update()
+
+
+
+
+
+
+
 client.disconnect()         
