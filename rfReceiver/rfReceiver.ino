@@ -9,7 +9,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.print(mySwitch1.available());
   if (mySwitch1.available()) {
  
     int value = mySwitch1.getReceivedValue();
@@ -17,23 +16,18 @@ void loop() {
     if (value == 0) {
       Serial.print("Unknown encoding");
     } else {
- 
-     Serial.print("Received ");
      unsigned long value = mySwitch1.getReceivedValue();
-     Serial.println( value );
      unsigned long onOff = value % 10;
      unsigned long pLotID = (value /10) % 10;
      unsigned long PID = (value /100)  %10 ;
      unsigned long zip = (value /1000) ;
-      Serial.println( onOff );
-      Serial.println( pLotID );
-      Serial.println( PID );
+      Serial.print( onOff );
+      Serial.print( "_");
+      Serial.print( pLotID );
+      Serial.print( "_");
+      Serial.print( PID );
+      Serial.print( "_");
       Serial.println( zip );
-      Serial.print(" / ");
-      Serial.print( mySwitch1.getReceivedBitlength() );
-      Serial.print("bit ");
-      Serial.print("Protocol: ");
-      Serial.println( mySwitch1.getReceivedProtocol() );
     }
  
     mySwitch1.resetAvailable();
