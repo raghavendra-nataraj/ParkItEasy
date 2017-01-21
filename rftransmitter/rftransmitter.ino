@@ -1,7 +1,6 @@
 #include "RCSwitch.h"
 
 RCSwitch mySwitch = RCSwitch();
-
 void setup() {
   Serial.begin(9600);
   // Transmitter is connected to Arduino Pin #10  
@@ -21,11 +20,12 @@ void setup() {
  
 void loop() {
   /* Same switch as above, but using decimal code */
-  mySwitch.send(5393, 24);
+  mySwitch.send(539, 24);
   delay(1000);  
-  mySwitch.send(5396, 24);
+  mySwitch.send(536, 24);
   delay(1000);  
  
+  }
  
   /* Same switch as above, but using binary code */
   /*mySwitch.send("000000000001010100010001");

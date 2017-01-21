@@ -20,14 +20,19 @@
   by Colby Newman
 */
 
+#include "RCSwitch.h"
+
+RCSwitch mySwitch = RCSwitch();
+
+
 const int trigPin = 2;
 const int echoPin = 4;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
+  mySwitch.enableTransmit(10);
 }
 
 // the loop function runs over and over again forever
@@ -52,7 +57,15 @@ void loop() {
   // convert the time into a distance
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
-  
+  String id = "1_";
+  String zip = "47408_";  
+  if(cm>0 && cm < 5){
+    String ret = id+zip+"True" ;
+    mySwitch.send(ret.c_str());
+  }else{
+    String ret = id+zip+"False";
+    mySwitch.send(ret.c_str());
+  }
   Serial.print(inches);
   Serial.print("in, ");
   Serial.print(cm);
@@ -60,11 +73,6 @@ void loop() {
   Serial.println();
   
   delay(100);
-  
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
 }
 
 long microsecondsToInches(long microseconds)
