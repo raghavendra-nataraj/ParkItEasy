@@ -1,6 +1,5 @@
+#include <RCSwitch.h>
 // IR Obstacle Collision Detection Module
-// Henry's Bench
-#include "RCSwitch.h"
 
 RCSwitch mySwitch = RCSwitch();
 
@@ -12,27 +11,25 @@ void setup() {
   pinMode(LED, OUTPUT);
   pinMode(isObstaclePin, INPUT);
   Serial.begin(9600);
-    mySwitch.enableTransmit(10);  
+  mySwitch.enableTransmit(10);
 }
 
 void loop() {
   isObstacle = digitalRead(isObstaclePin);
-  String id = "2_";
-  String zip = "57408_";  
-  String lot = "p1_"
+  String id = "2";
+  String zip = "57408";
+  String lot = "1";
+  long ret = 57408210;
   if (isObstacle == LOW)
   {
-    String ret = id+zip+lot+"True" ;
-    mySwitch.send(ret.c_str());
-    
+    mySwitch.send(ret + 1, 32);
     Serial.println("OBSTACLE!!, OBSTACLE!!");
     digitalWrite(LED, HIGH);
   }
   else
   {
-    String ret = id+zip+lot+"False" ;
-    mySwitch.send(ret.c_str());
-    
+    mySwitch.send(ret + 0, 32);
+    Serial.println(ret);
     Serial.println("clear");
     digitalWrite(LED, LOW);
   }

@@ -19,20 +19,19 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
    isPath = digitalRead(isPathPin);
-   String id = "1_";
-  String zip = "47408_";  
-  String lot = "p2_"
+   String id = "1";
+  String zip = "47408";  
+  String lot = "2";
+  long ret = 47408120;
   if (isPath == LOW)
   {
-    String ret = id+zip+lot+"True" ;
-    mySwitch.send(ret.c_str());
+    mySwitch.send(ret+1,32);
     Serial.println("OBSTACLE!!, OBSTACLE!!");
     digitalWrite(LED, HIGH);
   }
   else
   {
-    String ret = id+zip+lot+"False";
-    mySwitch.send(ret.c_str());
+    mySwitch.send(ret+0,32);
     Serial.println("clear");
     digitalWrite(LED, LOW);
   }
