@@ -19,7 +19,16 @@ void loop() {
     } else {
  
      Serial.print("Received ");
-      Serial.print( mySwitch1.getReceivedValue() );
+     unsigned long value = mySwitch1.getReceivedValue();
+     Serial.println( value );
+     unsigned long onOff = value % 10;
+     unsigned long pLotID = (value /10) % 10;
+     unsigned long PID = (value /100)  %10 ;
+     unsigned long zip = (value /1000) ;
+      Serial.println( onOff );
+      Serial.println( pLotID );
+      Serial.println( PID );
+      Serial.println( zip );
       Serial.print(" / ");
       Serial.print( mySwitch1.getReceivedBitlength() );
       Serial.print("bit ");
@@ -28,4 +37,27 @@ void loop() {
     }
  
     mySwitch1.resetAvailable();
+}
+delay(200);
+}
+
+static char * dec2binWzerofill(unsigned long Dec, unsigned int bitLength) {
+  static char bin[64]; 
+  unsigned int i=0;
+
+  while (Dec > 0) {
+    bin[32+i++] = ((Dec & 1) > 0) ? '1' : '0';
+    Dec = Dec >> 1;
+  }
+
+  for (unsigned int j = 0; j< bitLength; j++) {
+    if (j >= bitLength - i) {
+      bin[j] = bin[ 31 + i - (j - (bitLength - i)) ];
+    } else {
+      bin[j] = '0';
+    }
+  }
+  bin[bitLength] = '\0';
+  
+  return bin;
 }
