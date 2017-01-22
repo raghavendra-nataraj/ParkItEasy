@@ -5,7 +5,7 @@ RCSwitch mySwitch = RCSwitch();
 
 
 int LED = 13; // Use the onboard Uno LED
-int isPathPin = 4;  // This is our input pin
+int isPathPin = 8;  // This is our input pin
 int isPath = HIGH;  // HIGH MEANS NO OBSTACLE
 
 void setup() {
