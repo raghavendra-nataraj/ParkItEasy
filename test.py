@@ -76,9 +76,9 @@ while True:
     print serInp
     inps = serInp.split("_")
     if len(inps) == 4:
-         id = inps[1]
+         id = inps[2]
          zipcode = inps[3]
-         rpino = inps[2]
+         rpino = inps[1]
          statuss = inps[0]
          key = id + zipcode + rpino
          if key in masterdict:

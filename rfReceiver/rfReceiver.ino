@@ -5,7 +5,7 @@ void setup() {
   Serial.begin(9600);
   // Transmitter is connected to Arduino Pin #10  
   mySwitch1.enableReceive(0);
-}
+//}
 
 void loop() {
   // put your main code here, to run repeatedly:
