@@ -10,7 +10,7 @@ int isPath = HIGH;  // HIGH MEANS NO OBSTACLE
 
 void setup() {
   // put your setup code here, to run once:
- pinMode(LED, OUTPUT);
+  pinMode(LED, OUTPUT);
   pinMode(isPathPin, INPUT);
   Serial.begin(9600);
   mySwitch.enableTransmit(10);
